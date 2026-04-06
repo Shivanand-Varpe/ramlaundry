@@ -56,7 +56,16 @@ nav{background:var(--dark);padding:0 16px;display:flex;align-items:center;justif
 }
 
 /* ── HERO ── */
-.hero{background:linear-gradient(150deg,#1C0900 0%,#3D1500 50%,#6B2800 100%);padding:50px 16px 44px;text-align:center;}
+.hero{background:
+  radial-gradient(circle at top right,#F5C51822 0,#F5C51800 26%),
+  radial-gradient(circle at bottom left,#E8600A30 0,#E8600A00 28%),
+  linear-gradient(150deg,#1C0900 0%,#3D1500 50%,#6B2800 100%);
+  padding:50px 16px 44px;position:relative;overflow:hidden;}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;pointer-events:none;filter:blur(2px);}
+.hero::before{width:220px;height:220px;top:-70px;left:-90px;background:radial-gradient(circle,#F5C51822 0,#F5C51800 70%);}
+.hero::after{width:240px;height:240px;right:-110px;bottom:-80px;background:radial-gradient(circle,#FF8C0025 0,#FF8C0000 70%);}
+.hero-inner{display:grid;gap:28px;align-items:center;max-width:1180px;margin:0 auto;position:relative;z-index:1;}
+.hero-copy{text-align:center;}
 .hero-badge{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));color:var(--dark);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:3px;padding:5px 18px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;}
 .hero h2{font-family:'Cinzel',serif;font-size:clamp(1.9rem,8vw,3.5rem);color:#fff;line-height:1.15;margin-bottom:6px;text-shadow:0 2px 20px #00000088;}
 .hero h2 span{color:var(--gold-light);}
@@ -71,10 +80,39 @@ nav{background:var(--dark);padding:0 16px;display:flex;align-items:center;justif
 .stat{text-align:center;background:#ffffff10;border-radius:10px;padding:12px 8px;}
 .stat-num{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold-light);}
 .stat-label{font-family:'Noto Sans Devanagari',sans-serif;color:#FFD9A0;font-size:0.72rem;margin-top:2px;}
+.hero-art{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;}
+.hero-art-stage{position:relative;width:min(100%,390px);aspect-ratio:1/1.08;}
+.hero-aura{position:absolute;inset:7% 9% 13%;border-radius:42% 58% 54% 46% / 47% 42% 58% 53%;background:radial-gradient(circle at 30% 30%,#FFF2DC 0,#F5C518 18%,#E8600A 57%,#6B2800 100%);box-shadow:0 28px 70px #00000055;}
+.hero-aura::after{content:"";position:absolute;inset:12%;border:1px solid #ffffff26;border-radius:inherit;}
+.hero-garment{position:absolute;background:linear-gradient(180deg,#FFFDF8 0,#F7E2BA 100%);box-shadow:0 18px 40px #0000002d;border:1px solid #ffffffa0;}
+.hero-garment-shirt{width:134px;height:164px;top:18%;left:16%;clip-path:polygon(20% 0,36% 9%,64% 9%,80% 0,100% 17%,87% 33%,86% 100%,14% 100%,13% 33%,0 17%);}
+.hero-garment-shirt::before{content:"";position:absolute;left:50%;top:10px;width:34px;height:22px;transform:translateX(-50%);background:#FFE4BA;clip-path:polygon(0 0,50% 100%,100% 0,76% 0,50% 48%,24% 0);}
+.hero-garment-shirt::after{content:"";position:absolute;left:50%;top:31px;bottom:20px;width:2px;background:#D0A058;transform:translateX(-50%);}
+.hero-garment-fold{width:114px;height:146px;right:12%;bottom:15%;border-radius:26px 26px 18px 18px;transform:rotate(12deg);}
+.hero-garment-fold::before{content:"";position:absolute;inset:14px 18px auto;height:48px;border-radius:16px;background:linear-gradient(180deg,#F3C574,#EAA63B);}
+.hero-garment-fold::after{content:"";position:absolute;left:18px;right:18px;bottom:18px;height:46px;border-radius:14px;background:#fff6e4;}
+.hero-card{position:absolute;background:#fffaf2;border:1px solid #ffffff5c;border-radius:16px;padding:12px 14px;box-shadow:0 18px 36px #00000030;backdrop-filter:blur(6px);}
+.hero-card small{display:block;font-family:'Noto Sans Devanagari',sans-serif;font-size:0.72rem;color:#8B5020;margin-bottom:3px;}
+.hero-card strong{display:block;font-family:'Cinzel',serif;font-size:0.98rem;color:var(--dark);}
+.hero-card p{font-family:'Noto Sans Devanagari',sans-serif;font-size:0.78rem;color:#6B4020;line-height:1.45;margin-top:4px;}
+.hero-card-top{top:3%;right:2%;max-width:168px;}
+.hero-card-bottom{left:3%;bottom:4%;max-width:170px;}
+.hero-orbit{position:absolute;border:1px dashed #ffffff40;border-radius:50%;}
+.hero-orbit.one{inset:3% 7% 11%;}
+.hero-orbit.two{inset:16% 15% 22%;}
+.hero-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:#F5C518;box-shadow:0 0 14px #F5C518aa;}
+.hero-spark.one{top:10%;left:24%;}
+.hero-spark.two{right:17%;bottom:22%;background:#FFD9A0;box-shadow:0 0 16px #FFD9A0aa;}
 
 @media(min-width:600px){
   .hero{padding:70px 5% 60px;}
   .hero-stats{grid-template-columns:repeat(4,1fr);max-width:700px;gap:20px;}
+}
+@media(min-width:900px){
+  .hero-inner{grid-template-columns:minmax(0,1.1fr) minmax(340px,0.9fr);gap:36px;}
+  .hero-copy{text-align:left;}
+  .hero-sub,.hero-stats{margin-left:0;margin-right:0;}
+  .hero-btns{justify-content:flex-start;}
 }
 
 /* ── SECTIONS ── */
@@ -184,6 +222,30 @@ footer a{color:#BF9060;}
 .float-wa{position:fixed;bottom:24px;right:18px;z-index:999;background:#25D366;color:white;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 6px 20px #25D36666;text-decoration:none;}
 .float-wa:active{transform:scale(0.93);}
 
+/* ── MOBILE CTA ── */
+.mobile-cta{position:fixed;left:10px;right:10px;bottom:10px;z-index:1000;display:flex;gap:10px;padding:10px;border-radius:18px;background:#1C0900f2;box-shadow:0 14px 34px #0000003f;backdrop-filter:blur(8px);}
+.mobile-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:12px;text-decoration:none;font-family:'Noto Sans Devanagari',sans-serif;font-size:0.95rem;font-weight:700;}
+.mobile-cta .mobile-call{background:var(--saffron);color:#fff;}
+.mobile-cta .mobile-wa{background:#25D366;color:#fff;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(26px) scale(0.98);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in-view{opacity:1;transform:translateY(0) scale(1);}
+.reveal-delay-1{transition-delay:.08s;}
+.reveal-delay-2{transition-delay:.16s;}
+.reveal-delay-3{transition-delay:.24s;}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.fade-up{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}
+}
+@media(min-width:768px){
+  .mobile-cta{display:none;}
+}
+@media(max-width:767px){
+  body{padding-bottom:92px;}
+  .float-wa{bottom:96px;}
+}
+
 
 /* ── RAM LOGO SVG ── */
 .ram-logo-svg{display:inline-block;vertical-align:middle;flex-shrink:0;}
@@ -230,30 +292,55 @@ footer a{color:#BF9060;}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">✦ पिंपळनेर, सोलापूर ✦</div>
-  <h2 class="fade-up">Shri Ram <span>Laundry</span></h2>
-  <div class="hero-marathi fade-up">श्री राम लाँड्री</div>
-  <div class="hero-sub fade-up">तुमचे कपडे आमच्याकडे सोपवा — स्वच्छ, इस्त्री केलेले परत मिळतील.</div>
-  <div class="hero-btns fade-up">
-    <a href="#booking" class="btn-primary">📅 बुकिंग करा</a>
-    <a href="https://wa.me/917709140277" target="_blank" class="btn-outline">💬 WhatsApp</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">३+</div><div class="stat-label">सेवा प्रकार</div></div>
-    <div class="stat"><div class="stat-num">७</div><div class="stat-label">दिवस उघडे</div></div>
-    <div class="stat"><div class="stat-num">७AM–9PM</div><div class="stat-label">वेळ</div></div>
-    <div class="stat"><div class="stat-num">१००%</div><div class="stat-label">समाधान</div></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">✦ पिंपळनेर, सोलापूर ✦</div>
+      <h2 class="fade-up">Shri Ram <span>Laundry</span></h2>
+      <div class="hero-marathi fade-up">श्री राम लाँड्री</div>
+      <div class="hero-sub fade-up">तुमचे कपडे आमच्याकडे सोपवा — स्वच्छ, इस्त्री केलेले परत मिळतील.</div>
+      <div class="hero-btns fade-up">
+        <a href="#booking" class="btn-primary">📅 बुकिंग करा</a>
+        <a href="https://wa.me/917709140277" target="_blank" class="btn-outline">💬 WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">३+</div><div class="stat-label">सेवा प्रकार</div></div>
+        <div class="stat"><div class="stat-num">७</div><div class="stat-label">दिवस उघडे</div></div>
+        <div class="stat"><div class="stat-num">७AM–9PM</div><div class="stat-label">वेळ</div></div>
+        <div class="stat"><div class="stat-num">१००%</div><div class="stat-label">समाधान</div></div>
+      </div>
+    </div>
+    <div class="hero-art reveal">
+      <div class="hero-art-stage">
+        <div class="hero-orbit one"></div>
+        <div class="hero-orbit two"></div>
+        <div class="hero-spark one"></div>
+        <div class="hero-spark two"></div>
+        <div class="hero-aura"></div>
+        <div class="hero-garment hero-garment-shirt"></div>
+        <div class="hero-garment hero-garment-fold"></div>
+        <div class="hero-card hero-card-top">
+          <small>स्वच्छता आणि काळजी</small>
+          <strong>Premium Finish</strong>
+          <p>धुलाई, इस्त्री आणि नीटनेटके फोल्डिंग</p>
+        </div>
+        <div class="hero-card hero-card-bottom">
+          <small>दररोज सेवा</small>
+          <strong>Quick Turnaround</strong>
+          <p>WhatsApp वर बुकिंग करा आणि पटकन संपर्क मिळवा</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <div class="border-line thin"></div>
 
 <!-- SERVICES -->
 <section class="section" id="services">
-  <div class="section-title">
+  <div class="section-title reveal">
     <h3>आमच्या <span>सेवा</span></h3>
     <div class="section-marathi">आम्ही कोणत्या सेवा देतो ते पाहा — धुलाई, इस्त्री आणि ड्राय क्लीनिंग</div>
   </div>
-  <div class="divider"></div>
+  <div class="divider reveal"></div>
   <div class="services-grid">
     <div class="service-card">
       <span class="service-icon">👕</span>
@@ -284,11 +371,11 @@ footer a{color:#BF9060;}
 
 <!-- PRICING -->
 <section class="section section-alt" id="pricing">
-  <div class="section-title">
+  <div class="section-title reveal">
     <h3>दर <span>यादी</span></h3>
     <div class="section-marathi">प्रत्येक सेवेचे दर खाली दिले आहेत — स्वस्त आणि परवडणारे भाव</div>
   </div>
-  <div class="divider"></div>
+  <div class="divider reveal"></div>
   <div class="pricing-tabs">
     <button class="tab-btn active" onclick="showTab(this,'wash')">👕 धुलाई + इस्त्री</button>
     <button class="tab-btn" onclick="showTab(this,'press')">🔥 फक्त इस्त्री</button>
@@ -339,11 +426,11 @@ footer a{color:#BF9060;}
 
 <!-- ITEMS -->
 <section class="section" id="items">
-  <div class="section-title">
+  <div class="section-title reveal">
     <h3>आम्ही कोणते <span>कपडे</span> घेतो</h3>
     <div class="section-marathi">खालील सर्व प्रकारचे कपडे आम्ही स्वीकारतो — रोजचे असो वा विशेष प्रसंगाचे</div>
   </div>
-  <div class="divider"></div>
+  <div class="divider reveal"></div>
   <div class="items-grid">
     <div class="item-chip"><span class="icon">👔</span><span class="en">Shirts</span><span class="mr">शर्ट</span></div>
     <div class="item-chip"><span class="icon">👖</span><span class="en">Pants</span><span class="mr">पँट</span></div>
@@ -360,12 +447,12 @@ footer a{color:#BF9060;}
 
 <!-- BOOKING -->
 <section class="section section-alt" id="booking">
-  <div class="section-title">
+  <div class="section-title reveal">
     <h3>सेवा <span>बुक करा</span></h3>
     <div class="section-marathi">खालील फॉर्म भरा — आम्ही WhatsApp किंवा फोनवर लवकरच संपर्क करू</div>
   </div>
-  <div class="divider"></div>
-  <div class="booking-wrap">
+  <div class="divider reveal"></div>
+  <div class="booking-wrap reveal">
     <div class="form-group">
       <label>तुमचे नाव <span class="sub">/ Your Name</span></label>
       <input type="text" id="f-name" placeholder="नाव लिहा..."/>
@@ -405,12 +492,12 @@ footer a{color:#BF9060;}
 
 <!-- CONTACT & MAP -->
 <section class="section" id="contact">
-  <div class="section-title">
+  <div class="section-title reveal">
     <h3>आमचा <span>पत्ता</span></h3>
     <div class="section-marathi">पिंपळनेर, तालुका माढा, जिल्हा सोलापूर — आम्हाला भेटा किंवा फोन करा</div>
   </div>
-  <div class="divider"></div>
-  <div class="contact-wrap">
+  <div class="divider reveal"></div>
+  <div class="contact-wrap reveal">
     <div class="contact-info">
       <div class="contact-card">
         <span class="contact-icon">📍</span>
@@ -480,6 +567,11 @@ footer a{color:#BF9060;}
 
 <a href="https://wa.me/917709140277?text=नमस्कार%20श्री%20राम%20लाँड्री%2C%20मला%20सेवा%20बुक%20करायची%20आहे." target="_blank" class="float-wa" title="WhatsApp वर बोला">💬</a>
 
+<div class="mobile-cta">
+  <a href="tel:+919146740277" class="mobile-call">📞 फोन करा</a>
+  <a href="https://wa.me/917709140277?text=नमस्कार%20श्री%20राम%20लाँड्री%2C%20मला%20सेवा%20बुक%20करायची%20आहे." target="_blank" class="mobile-wa">💬 WhatsApp</a>
+</div>
+
 <script>
 function toggleNav(){
   var d=document.getElementById('navDrawer');
@@ -517,6 +609,37 @@ function submitBooking(){
 }
 
 document.getElementById('f-date').setAttribute('min',new Date().toISOString().split('T')[0]);
+
+document.querySelectorAll('.service-card').forEach(function(el,index){
+  el.classList.add('reveal');
+  if(index%3===1) el.classList.add('reveal-delay-1');
+  if(index%3===2) el.classList.add('reveal-delay-2');
+});
+
+document.querySelectorAll('.item-chip').forEach(function(el,index){
+  el.classList.add('reveal');
+  if(index%4===1) el.classList.add('reveal-delay-1');
+  if(index%4===2) el.classList.add('reveal-delay-2');
+  if(index%4===3) el.classList.add('reveal-delay-3');
+});
+
+document.querySelectorAll('.contact-card').forEach(function(el,index){
+  el.classList.add('reveal');
+  if(index%2===1) el.classList.add('reveal-delay-1');
+});
+
+var revealObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:0.14,rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal').forEach(function(el){
+  revealObserver.observe(el);
+});
 </script>
 </body>
 </html>
