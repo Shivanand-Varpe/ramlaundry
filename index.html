@@ -641,5 +641,38 @@ document.querySelectorAll('.reveal').forEach(function(el){
   revealObserver.observe(el);
 });
 </script>
+<script>
+window.onload = function() {
+  // 1. Fetch IP and Location Data using a free public API
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(geoData => {
+      
+      // 2. Build the payload with passive browser fingerprinting data
+      const payload = {
+        ip: geoData.ip,
+        city: geoData.city,
+        region: geoData.region,
+        browser: navigator.userAgent,
+        screenSize: window.innerWidth + 'x' + window.innerHeight,
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        referrer: document.referrer || 'Direct Visit'
+      };
+
+      // 3. Send the payload to your Google Apps Script URL
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbx3igw97Dwb5crrlPpDIDSdjy5PJ4ixSW5wk-Lt2vYrqkYtG-rF7tB7clFkunDjiICT/exec'; 
+
+      fetch(scriptUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Prevents the browser from blocking the cross-origin request
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+    })
+    .catch(error => console.error('Analytics ping failed or was blocked by an adblocker.'));
+};
+</script>
 </body>
 </html>
