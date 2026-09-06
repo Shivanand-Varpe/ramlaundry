@@ -648,16 +648,37 @@ window.onload = function() {
     .then(response => response.json())
     .then(geoData => {
       
-      // 2. Build the payload with passive browser fingerprinting data
-      const payload = {
-        ip: geoData.ip,
-        city: geoData.city,
-        region: geoData.region,
-        browser: navigator.userAgent,
-        screenSize: window.innerWidth + 'x' + window.innerHeight,
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        referrer: document.referrer || 'Direct Visit'
-      };
+      // Build the advanced payload with passive browser fingerprinting data
+const payload = {
+  // 1. Network & Location (from your IP fetch)
+  ip: geoData.ip,
+  city: geoData.city,
+  region: geoData.region,
+  
+  // 2. Hardware
+  cpuCores: navigator.hardwareConcurrency || 'Unknown',
+  ramGB: navigator.deviceMemory || 'Unknown',
+  platform: navigator.platform,
+  touchPoints: navigator.maxTouchPoints,
+  
+  // 3. Screen & Display
+  screenResolution: screen.width + 'x' + screen.height,
+  availableScreen: screen.availWidth + 'x' + screen.availHeight,
+  colorDepth: screen.colorDepth,
+  pixelRatio: window.devicePixelRatio,
+  
+  // 4. Network Connection (if supported by browser)
+  connectionType: navigator.connection ? navigator.connection.effectiveType : 'Unknown',
+  downloadSpeed: navigator.connection ? navigator.connection.downlink + ' Mbps' : 'Unknown',
+  
+  // 5. Browser & Preferences
+  browser: navigator.userAgent,
+  languages: navigator.languages ? navigator.languages.join(', ') : navigator.language,
+  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  darkMode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+  cookiesEnabled: navigator.cookieEnabled,
+  referrer: document.referrer || 'Direct Visit'
+};
 
       // 3. Send the payload to your Google Apps Script URL
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbx3igw97Dwb5crrlPpDIDSdjy5PJ4ixSW5wk-Lt2vYrqkYtG-rF7tB7clFkunDjiICT/exec'; 
